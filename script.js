@@ -27,15 +27,13 @@ form.addEventListener("submit", async function (e) {
 
     const result = await response.json();
 
-    if (result.status === "success") {
-      resultBox.className = "success";
-      resultBox.textContent =
-        "Berhasil terkoneksi ke Apps Script!\n\n" +
-        JSON.stringify(result.receivedData, null, 2);
-    } else {
-      resultBox.className = "error";
-      resultBox.textContent = "Error: " + result.message;
-    }
+ if (result.status === "success") {
+  resultBox.className = "success";
+  resultBox.textContent =
+    "Berhasil disimpan!\n\n" +
+    "Request ID: " + result.requestId + "\n\n" +
+    JSON.stringify(result.receivedData, null, 2);
+}
 
   } catch (error) {
     resultBox.className = "error";
