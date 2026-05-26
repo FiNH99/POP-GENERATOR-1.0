@@ -1,23 +1,82 @@
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUe-U9rldjDdU1QZLxgEN5yWF4TwPy8Pv1njDXzYbAj4JC2AtCEJ6brV_XYsTEyAoqvA/exec";
+const APPS_SCRIPT_URL = "PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI";
 
 const form = document.getElementById("promoForm");
+const layoutSelect = document.getElementById("layout");
+const productsContainer = document.getElementById("productsContainer");
 const resultBox = document.getElementById("result");
+const submitButton = form.querySelector("button");
+
+function renderProductForms() {
+  const totalProducts = Number(layoutSelect.value);
+  productsContainer.innerHTML = "";
+
+  for (let i = 1; i <= totalProducts; i++) {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+      <h3>Produk ${i}</h3>
+
+      <label>Brand</label>
+      <input type="text" id="brand${i}" placeholder="Contoh: SWEET C" required>
+
+      <label>Deskripsi</label>
+      <input type="text" id="deskripsi${i}" placeholder="Contoh: Jeruk Manis Premium" required>
+
+      <div class="grid-2">
+        <div>
+          <label>Harga Normal</label>
+          <input type="text" id="hargaNormal${i}" placeholder="Contoh: 25.000" required>
+        </div>
+
+        <div>
+          <label>Harga Promo</label>
+          <input type="text" id="hargaPromo${i}" placeholder="Contoh: 19.900" required>
+        </div>
+      </div>
+    `;
+
+    productsContainer.appendChild(card);
+  }
+}
+
+layoutSelect.addEventListener("change", renderProductForms);
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  const layout = layoutSelect.value;
+  const totalProducts = Number(layout);
+
+  const products = [];
+
+  for (let i = 1; i <= totalProducts; i++) {
+    products.push({
+      brand: document.getElementById(`brand${i}`).value,
+      deskripsi: document.getElementById(`deskripsi${i}`).value,
+      hargaNormal: document.getElementById(`hargaNormal${i}`).value,
+      hargaPromo: document.getElementById(`hargaPromo${i}`).value
+    });
+  }
+
+  const data = {
+    layout: layout,
+    periode: document.getElementById("periode").value,
+    products: products,
+
+    // Cadangan supaya backend lama tetap bisa baca produk pertama
+    brand: products[0]?.brand || "",
+    deskripsi: products[0]?.deskripsi || "",
+    hargaNormal: products[0]?.hargaNormal || "",
+    hargaPromo: products[0]?.hargaPromo || ""
+  };
 
   resultBox.className = "";
   resultBox.style.display = "block";
   resultBox.textContent = "Sedang generate PDF...";
 
-  const data = {
-    brand: document.getElementById("brand").value,
-    deskripsi: document.getElementById("deskripsi").value,
-    hargaNormal: document.getElementById("hargaNormal").value,
-    hargaPromo: document.getElementById("hargaPromo").value,
-    periode: document.getElementById("periode").value,
-    layout: document.getElementById("layout").value
-  };
+  submitButton.disabled = true;
+  submitButton.textContent = "Memproses...";
 
   try {
     const response = await fetch(APPS_SCRIPT_URL, {
@@ -44,4 +103,9 @@ form.addEventListener("submit", async function (e) {
     resultBox.className = "error";
     resultBox.textContent = "Gagal generate PDF: " + error.message;
   }
+
+  submitButton.disabled = false;
+  submitButton.textContent = "Generate PDF";
 });
+
+renderProductForms();
