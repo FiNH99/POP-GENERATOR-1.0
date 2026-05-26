@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = "PASTE_URL_WEB_APP_APPS_SCRIPT_DI_SINI";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUe-U9rldjDdU1QZLxgEN5yWF4TwPy8Pv1njDXzYbAj4JC2AtCEJ6brV_XYsTEyAoqvA/exec";
 
 const form = document.getElementById("promoForm");
 const layoutSelect = document.getElementById("layout");
