@@ -6,6 +6,15 @@ const productsContainer = document.getElementById("productsContainer");
 const resultBox = document.getElementById("result");
 const submitButton = form.querySelector("button");
 
+const responseText = await response.text();
+
+let result;
+try {
+  result = JSON.parse(responseText);
+} catch (err) {
+  throw new Error("Backend tidak mengirim JSON. Cek URL Apps Script / permission / deployment. Isi respons: " + responseText.substring(0, 150));
+}
+
 function renderProductForms() {
   const totalProducts = Number(layoutSelect.value);
   productsContainer.innerHTML = "";
