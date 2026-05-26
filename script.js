@@ -8,7 +8,7 @@ form.addEventListener("submit", async function (e) {
 
   resultBox.className = "";
   resultBox.style.display = "block";
-  resultBox.textContent = "Mengirim data...";
+  resultBox.textContent = "Sedang generate PDF...";
 
   const data = {
     brand: document.getElementById("brand").value,
@@ -27,16 +27,21 @@ form.addEventListener("submit", async function (e) {
 
     const result = await response.json();
 
- if (result.status === "success") {
-  resultBox.className = "success";
-  resultBox.textContent =
-    "Berhasil disimpan!\n\n" +
-    "Request ID: " + result.requestId + "\n\n" +
-    JSON.stringify(result.receivedData, null, 2);
-}
+    if (result.status === "success") {
+      resultBox.className = "success";
+      resultBox.innerHTML = `
+        <strong>PDF berhasil dibuat!</strong><br><br>
+        Request ID: ${result.requestId}<br>
+        File: ${result.fileName}<br><br>
+        <a href="${result.pdfUrl}" target="_blank">Buka PDF</a>
+      `;
+    } else {
+      resultBox.className = "error";
+      resultBox.textContent = "Error: " + result.message;
+    }
 
   } catch (error) {
     resultBox.className = "error";
-    resultBox.textContent = "Gagal konek ke Apps Script: " + error.message;
+    resultBox.textContent = "Gagal generate PDF: " + error.message;
   }
 });
