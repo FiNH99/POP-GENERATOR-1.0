@@ -7,39 +7,29 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>Promo Generator</h1>
-    <p>Test input data promo ke Apps Script backend.</p>
+<div class="container">
+  <h1>Promo Generator</h1>
+  <p>Generate PDF promo 1, 2, atau 3 produk.</p>
 
-    <form id="promoForm">
-      <label>Brand</label>
-      <input type="text" id="brand" placeholder="Contoh: SWEET C" required>
+  <form id="promoForm">
+    <label>Layout Promo</label>
+    <select id="layout" required>
+      <option value="1">1 Produk</option>
+      <option value="2">2 Produk</option>
+      <option value="3">3 Produk</option>
+    </select>
 
-      <label>Deskripsi</label>
-      <input type="text" id="deskripsi" placeholder="Contoh: Jeruk Manis Premium" required>
+    <label>Periode Promo</label>
+    <input type="text" id="periode" placeholder="Contoh: 25 Nov - 14 Des 2025" required>
 
-      <label>Harga Normal</label>
-      <input type="text" id="hargaNormal" placeholder="Contoh: 25.000" required>
+    <div id="productsContainer"></div>
 
-      <label>Harga Promo</label>
-      <input type="text" id="hargaPromo" placeholder="Contoh: 19.900" required>
+    <button type="submit">Generate PDF</button>
+  </form>
 
-      <label>Periode Promo</label>
-      <input type="text" id="periode" placeholder="Contoh: 25 Nov - 14 Des 2025" required>
+  <div id="result"></div>
+</div>
 
-      <label>Layout</label>
-      <select id="layout" required>
-        <option value="1">1 Produk</option>
-        <option value="2">2 Produk</option>
-        <option value="3">3 Produk</option>
-      </select>
-
-      <button type="submit">Kirim Test</button>
-    </form>
-
-    <div id="result"></div>
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
