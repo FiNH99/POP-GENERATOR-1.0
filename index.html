@@ -31,5 +31,37 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+  alert("INDEX HTML TERBACA");
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const productsContainer = document.getElementById("productsContainer");
+
+    if (!productsContainer) {
+      alert("productsContainer TIDAK ADA");
+      return;
+    }
+
+    productsContainer.innerHTML = `
+      <div class="product-card">
+        <h3>Produk 1</h3>
+
+        <label>Brand</label>
+        <input type="text" placeholder="Contoh: SWEET C" required>
+
+        <label>Deskripsi</label>
+        <input type="text" placeholder="Contoh: Jeruk Manis Premium" required>
+
+        <label>Harga Normal</label>
+        <input type="text" placeholder="Contoh: 25.000" required>
+
+        <label>Harga Promo</label>
+        <input type="text" placeholder="Contoh: 19.900" required>
+      </div>
+    `;
+  });
+</script>
+
+<script src="script.js?v=10"></script>
 </body>
 </html>
