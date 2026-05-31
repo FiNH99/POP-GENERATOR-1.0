@@ -170,7 +170,7 @@
 
     <div id="productsContainer"></div>
 
-    <button type="submit" id="submitBtn">Simpan Data & Gambar</button>
+    <button type="submit" id="submitBtn">Generate PDF</button>
   </form>
 
   <div id="result"></div>
@@ -413,7 +413,7 @@ form.addEventListener("submit", async function (e) {
     }
 
     const payload = {
-      action: "savePromo",
+      action: "generatePdf",
       templateType: document.getElementById("templateType").value,
       layout: String(layout),
       periode: document.getElementById("periode").value,
