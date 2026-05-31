@@ -370,12 +370,8 @@ function renderProductForms(){
 
           <label>Upload Image Product</label>
 
-          <input
-            type="file"
-            id="imageFile${i}"
-            accept="image/*"
-            onchange="previewImage(${i})"
-          >
+          <input type="file" 
+        id="imageFile${i}" accept="image/            png,image/jpeg,image/jpg/" onchange="previewImage(${i})">
 
           <img
             id="preview${i}"
