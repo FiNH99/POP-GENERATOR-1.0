@@ -177,7 +177,7 @@
 </div>
 
 <script>
-const APPS_SCRIPT_URL = "AKfycbyUe-U9rldjDdU1QZLxgEN5yWF4TwPy8Pv1njDXzYbAj4JC2AtCEJ6brV_XYsTEyAoqvA/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUe-U9rldjDdU1QZLxgEN5yWF4TwPy8Pv1njDXzYbAj4JC2AtCEJ6brV_XYsTEyAoqvA/exec";
 
 const form = document.getElementById("promoForm");
 const layoutSelect = document.getElementById("layout");
@@ -445,7 +445,9 @@ form.addEventListener("submit", async function (e) {
 
   } catch (error) {
     resultBox.className = "error";
-    resultBox.textContent = "Gagal: " + error.message;
+    resultBox.textContent =
+  "Gagal: " + error.message + "\n\n" +
+  "Cek URL Apps Script, deployment, permission, atau ukuran gambar.";
   }
 
   submitBtn.disabled = false;
