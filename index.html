@@ -429,12 +429,15 @@ form.addEventListener("submit", async function (e) {
     const result = JSON.parse(responseText);
 
     if (result.status === "success") {
-      resultBox.className = "success";
-      resultBox.innerHTML =
-    "<strong>Berhasil disimpan!</strong><br><br>" +
+    resultBox.className = "success";
+    resultBox.innerHTML =
+    "<strong>PDF berhasil dibuat!</strong><br><br>" +
     "Request ID: " + result.requestId + "<br>" +
-    "Jumlah produk: " + result.products.length;
+    "File: " + result.fileName + "<br><br>" +
+    '<a href="' + result.pdfUrl + '" target="_blank">Buka PDF</a>';
 
+    await loadExistingImages();
+    }
       await loadExistingImages();
       renderProductForms();
 
