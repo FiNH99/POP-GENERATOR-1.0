@@ -430,10 +430,10 @@ form.addEventListener("submit", async function (e) {
 
     if (result.status === "success") {
       resultBox.className = "success";
-      resultBox.textContent =
-        "Berhasil disimpan!\\n\\n" +
-        "Request ID: " + result.requestId + "\\n" +
-        "Jumlah produk: " + result.products.length;
+      resultBox.innerHTML =
+    "<strong>Berhasil disimpan!</strong><br><br>" +
+    "Request ID: " + result.requestId + "<br>" +
+    "Jumlah produk: " + result.products.length;
 
       await loadExistingImages();
       renderProductForms();
